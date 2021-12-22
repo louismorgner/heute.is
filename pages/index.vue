@@ -22,7 +22,7 @@
           </div>
           <div class="text-right">
             <div class="yearProgressWrapper">
-                <span>95%</span>
+                <span>{{ yearInPercent }}%</span>
             </div>
           </div>
         </div>
@@ -37,7 +37,16 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: 'IndexPage'
+  name: 'IndexPage',
+  computed: {
+    yearInPercent() {
+      // Returns the progress of the year in rounded percent
+      const dayOfYear = Math.floor((Date.now() - Date.parse(new Date().getFullYear().toString())) / 86400000);
+      const yearInPercent = dayOfYear / 365;
+
+      return Math.round(yearInPercent * 100);
+    }
+  }
 })
 </script>
 
