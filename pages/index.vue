@@ -87,6 +87,9 @@ export default Vue.extend({
     },
     promptToday () {
       return this.$store.state.prompt.promptToday
+    },
+    lastPromptUpdate () {
+      return this.$store.state.prompt.lastPromptUpdate
     }
   },
   mounted() {

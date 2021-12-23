@@ -14,8 +14,10 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 
+  target: 'static',
+
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [{ src: '~/plugins/localStorageVuex', mode: 'client' }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
