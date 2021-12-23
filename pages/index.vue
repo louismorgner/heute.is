@@ -116,6 +116,7 @@ export default Vue.extend({
       if(isShowing) {
         this.showBuildPromptSubmissionHint = true;
         this.showBuildPrompt = true;
+        this.showBuildPromptSubmissionHint = false;
         this.headline = "What will you build today?";
       } else {
         this.showBuildPromptSubmissionHint = false;
