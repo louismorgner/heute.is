@@ -5,7 +5,7 @@
         <div class="grid grid-cols-2">
           <div class="">
             <HeuteIsLogo class="mb-1" />
-            <h3>Monday, Dec 17th</h3>
+            <h3>{{ dateString }}</h3>
           </div>
           <div class="text-right">
             <h3 class="text-2xl">{{ time }}</h3>
@@ -54,6 +54,21 @@ export default Vue.extend({
 
       return Math.round(yearInPercent * 100)
     },
+    dateString() {
+      const today = new Date();
+      const weekDay = today.toLocaleString('en-us', {weekday:'long'});
+      const month = today.toLocaleString('en-us', {month:'short'});
+      const day = today.toLocaleString('en-us', {day:'numeric'});
+      
+      // Converts numeric day with approprate suffix
+      function ordinal(n) {
+          const s = ["th", "st", "nd", "rd"];
+          const v = n%100;
+          return n + (s[(v-20)%10] || s[v] || s[0]);
+      }
+
+      return weekDay + ", " + month + " " + ordinal(day);
+    }
   },
   mounted() {
     const self = this;
@@ -68,7 +83,11 @@ export default Vue.extend({
     currentTime() {
       // Sets time to the current time string for watch
       const now = new Date()
-      this.time = now.getHours() + ":" + now.getMinutes()
+      if(now.getMinutes() < 10)  {
+        this.time = now.getHours() + ":0" + now.getMinutes()
+      } else {
+        this.time = now.getHours() + ":" + now.getMinutes()
+      }
     }
   },
 })
