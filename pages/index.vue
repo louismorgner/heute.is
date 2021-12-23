@@ -49,6 +49,7 @@
 
 <script>
 import Vue from 'vue'
+import { mapMutations } from 'vuex';
 
 export default Vue.extend({
   name: 'DashboardPage',
@@ -83,6 +84,9 @@ export default Vue.extend({
       }
 
       return weekDay + ", " + month + " " + ordinal(day);
+    },
+    promptToday () {
+      return this.$store.state.prompt.promptToday
     }
   },
   mounted() {
@@ -121,9 +125,13 @@ export default Vue.extend({
       } else {
         this.showBuildPromptSubmissionHint = false;
         this.showBuildPrompt = false;
+        this.$store.commit('prompt/setPrompt', this.buildPrompt)
         this.headline = this.buildPrompt;
       }
-    }
+    },
+    ...mapMutations({
+      setPrompt: 'prompt/setPrompt'
+    })
   },
 })
 </script>
