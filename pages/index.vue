@@ -8,7 +8,7 @@
             <h3>Monday, Dec 17th</h3>
           </div>
           <div class="text-right">
-            <h3 class="text-2xl">4:30</h3>
+            <h3 class="text-2xl">{{ time }}</h3>
           </div>
         </div>
       </div>
@@ -21,8 +21,11 @@
             <img src="~/static/img/sloth_icon.png" alt="" width="35px">
           </div>
           <div class="text-right">
-            <div class="yearProgressWrapper">
-                <span>{{ yearInPercent }}%</span>
+            <div data-tip="This shows you the progress of the year in percent" class="tooltip tooltip-left">
+              <div class="yearProgressWrapper">
+                  <span>{{ yearInPercent }}%</span>
+                  <progress class="progress progress-primary" value="70" max="100"></progress> 
+              </div>
             </div>
           </div>
         </div>
@@ -33,22 +36,47 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: 'IndexPage',
+  name: 'DashboardPage',
+  data() {
+    return {
+      time: ""
+    }
+  },
   computed: {
     yearInPercent() {
       // Returns the progress of the year in rounded percent
-      const dayOfYear = Math.floor((Date.now() - Date.parse(new Date().getFullYear().toString())) / 86400000);
-      const yearInPercent = dayOfYear / 365;
+      const dayOfYear = Math.floor((Date.now() - Date.parse(new Date().getFullYear().toString())) / 86400000)
+      const yearInPercent = dayOfYear / 365
 
-      return Math.round(yearInPercent * 100);
+      return Math.round(yearInPercent * 100)
+    },
+  },
+  mounted() {
+    const self = this;
+    self.currentTime()
+
+    // Set interval to update watch
+    setInterval(function(){
+      self.currentTime()
+    }, 1000);
+  },
+  methods: {
+    currentTime() {
+      // Sets time to the current time string for watch
+      const now = new Date()
+      this.time = now.getHours() + ":" + now.getMinutes()
     }
-  }
+  },
 })
 </script>
 
 <style scoped>
+progress.progress.progress-primary {
+    height: 3px;
+    background-color: #ffffff30;
+}
 </style>
