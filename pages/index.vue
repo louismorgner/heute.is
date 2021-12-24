@@ -101,6 +101,14 @@ export default Vue.extend({
       self.currentTime()
     }, 1000);
   },
+  created() {
+    if(this.$store.getters['prompt/promptExists']) {
+      // Show existing prompt
+      this.showBuildPromptSubmissionHint = false;
+      this.showBuildPrompt = false;
+      this.headline = this.$store.state.prompt.promptToday;
+    }
+  },
   methods: {
     currentTime() {
       // Sets time to the current time string for watch
@@ -128,13 +136,10 @@ export default Vue.extend({
       } else {
         this.showBuildPromptSubmissionHint = false;
         this.showBuildPrompt = false;
-        this.$store.commit('prompt/setPrompt', this.buildPrompt)
+        this.$store.dispatch('prompt/setPrompt', this.buildPrompt)
         this.headline = this.buildPrompt;
       }
     },
-    ...mapMutations({
-      setPrompt: 'prompt/setPrompt'
-    })
   },
 })
 </script>

@@ -1,5 +1,8 @@
 // This plugin syncs the vuex store to localStorage
 export default (context) => {
+  const store = context.store
+
+  store.dispatch('prompt/retrieveLocalPromptData')
   /**
   const store = context.store
 
