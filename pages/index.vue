@@ -100,8 +100,7 @@ export default Vue.extend({
     setInterval(function(){
       self.currentTime()
     }, 1000);
-  },
-  created() {
+
     if(this.$store.getters['prompt/promptExists']) {
       // Show existing prompt
       this.showBuildPromptSubmissionHint = false;
