@@ -12,8 +12,8 @@
           </div>
         </div>
       </div>
-      <div class="max-w-s w-full absolute top-2/4 left-2/4 transform -translate-y-2/3 -translate-x-1/2 text-center">
-        <h1 class="text-6xl">{{ headline }}</h1>
+      <div class="max-w-4xl w-full absolute top-2/4 left-2/4 transform -translate-y-2/3 -translate-x-1/2 text-center">
+        <h1 class="text-6xl font-medium leading-10" style="font-size: 4rem;line-height: 4.2rem;" >{{ headline }}</h1>
         <div v-if="!showBuildPrompt">
           <button class="btn btn-outline btn-circle btn-xs mt-5" style="color: rgb(255 255 255 / 31%)" @click="toggleBuildPrompt(true)">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-4 h-4 stroke-current">   
@@ -57,7 +57,7 @@ export default Vue.extend({
     return {
       time: "",
       buildPrompt: "",
-      headline: "What will you build today?",
+      headline: "What's the most impactful you can accomplish today?",
       showBuildPrompt: true,
       showBuildPromptSubmissionHint: false
     }
@@ -131,7 +131,7 @@ export default Vue.extend({
         this.showBuildPromptSubmissionHint = true;
         this.showBuildPrompt = true;
         this.showBuildPromptSubmissionHint = false;
-        this.headline = "What will you build today?";
+        this.headline = "What's the most impactful you can accomplish today?";
       } else {
         this.showBuildPromptSubmissionHint = false;
         this.showBuildPrompt = false;
