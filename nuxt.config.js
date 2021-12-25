@@ -50,5 +50,19 @@ export default {
         modules: false, // This fixes the tailwind hot reload bug
       },
     },
+    extend(config, { isDev }) {
+      // ..
+      config.module.rules.push({
+        test: /\.mp3$/,
+        loader: 'file-loader',
+        query: {
+          name: 'static/media/[name].[hash:8].[ext]',
+        },
+      })
+      // Sets webpack's mode to development if `isDev` is true.
+      if (isDev) {
+        config.mode = 'development'
+      }
+    },
   },
 }

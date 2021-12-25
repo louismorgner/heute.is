@@ -8,6 +8,8 @@
 </template>
 
 <script>
+import soundFile from "../static/sound/timer_done.mp3";
+
 export default {
   data() {
     return {
@@ -34,9 +36,9 @@ export default {
     // Set interval to update watch
     setInterval(function(){
       if(self.isPaused) return;
+      
       if(self.timeLeft < 1) {
-        self.isPaused = true;
-        self.isFinished = true;
+        self.timerDone();
         return;
       };
       self.timeLeft = self.timeLeft - 1000;
@@ -58,7 +60,12 @@ export default {
     }
   },
   methods: {
-  
+    timerDone() {
+      this.isPaused = true;
+      this.isFinished = true;
+      const audio = new Audio(soundFile);
+      audio.play();
+    }
   }
 }
 </script>
