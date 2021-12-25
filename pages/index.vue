@@ -20,6 +20,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>                       
             </svg>
           </button>
+          <PomodoroTimer class="inline-block ml-3" />
         </div>
         <textarea v-if="showBuildPrompt" v-model="buildPrompt" rows="1" placeholder="Today, I will..." class="buildPromptForm mt-8" @keypress="detectBuildPromptChange($event)" @keyup.enter="toggleBuildPrompt(false)" />
         <div class="block text-center pt-5">
@@ -50,7 +51,6 @@
 
 <script>
 import Vue from 'vue'
-import { mapMutations } from 'vuex';
 
 export default Vue.extend({
   name: 'DashboardPage',
