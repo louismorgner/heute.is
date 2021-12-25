@@ -28,14 +28,15 @@
       </div>
       <div class="container w-full bottom-1 absolute">
         <div class="grid grid-cols-2">
-          <div class="">
-            <img src="~/static/img/sloth_icon.png" alt="" width="35px">
-          </div>
+          <a href="https://medium.com/heute-is" target="_blank" class="">
+            <img src="~/static/icon.png" alt="" width="35px">
+          </a>
           <div class="text-right">
             <div data-tip="This shows you the progress of the year in percent" class="tooltip tooltip-left">
               <div class="yearProgressWrapper">
-                  <span>{{ yearInPercent }}%</span>
-                  <progress class="progress progress-primary" value="70" max="100"></progress> 
+                  <span class="">{{ yearInPercent }}%</span>
+                  <div class="h-2"></div>
+                  <progress class="progress progress-primary absolute left-0 bottom-0" :value="yearInPercent" max="100"></progress> 
               </div>
             </div>
           </div>
@@ -57,7 +58,7 @@ export default Vue.extend({
     return {
       time: "",
       buildPrompt: "",
-      headline: "What's the most impactful you can accomplish today?",
+      headline: "What's the most impactful thing you can accomplish today?",
       showBuildPrompt: true,
       showBuildPromptSubmissionHint: false
     }
@@ -131,7 +132,7 @@ export default Vue.extend({
         this.showBuildPromptSubmissionHint = true;
         this.showBuildPrompt = true;
         this.showBuildPromptSubmissionHint = false;
-        this.headline = "What's the most impactful you can accomplish today?";
+        this.headline = "What's the most impactful thing you can accomplish today?";
       } else {
         this.showBuildPromptSubmissionHint = false;
         this.showBuildPrompt = false;
