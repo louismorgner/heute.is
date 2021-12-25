@@ -5,7 +5,8 @@
         <h1 class="timer">{{ timerString }}</h1>
         <p>{{ focusText }}</p>
       </div>
-      <div v-else>        
+      <div v-else>
+        <nuxt-link to="/">Go back</nuxt-link>    
         <input type="checkbox" id="st1" value="1">
         <label for="st1"></label> 
         <input type="checkbox" id="st2" value="2" />
@@ -71,7 +72,6 @@ export default {
   },
   created() {
     const query = this.$route.query;
-
     if(query.minutes) {
       this.timeLeft = query.minutes * 1000 * 60;
     }
@@ -94,9 +94,13 @@ export default {
       // Finish sound
       const sound = new Howl({
         src: [soundFile],
+         volume: 0.5,
       });
 
       sound.play();
+
+      // Update daily Timer counter
+      this.$store.dispatch('timer/setCounter', { increment: true })
     },
     startMusic() {
       const id = lofiSound.play();

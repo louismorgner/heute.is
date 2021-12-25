@@ -3,6 +3,7 @@ export default (context) => {
   const store = context.store
 
   store.dispatch('prompt/retrieveLocalPromptData')
+  store.dispatch('timer/retrieveLocalData')
   /**
   const store = context.store
 

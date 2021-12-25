@@ -21,6 +21,7 @@
             </svg>
           </button>
           <PomodoroTimer class="inline-block ml-3" />
+          <span>{{ dailyCounter }}</span>
         </div>
         <textarea v-if="showBuildPrompt" v-model="buildPrompt" rows="1" placeholder="Today, I will..." class="buildPromptForm mt-8" @keypress="detectBuildPromptChange($event)" @keyup.enter="toggleBuildPrompt(false)" />
         <div class="block text-center pt-5">
@@ -51,6 +52,7 @@
 
 <script>
 import Vue from 'vue'
+import { mapState } from 'vuex'
 
 export default Vue.extend({
   name: 'DashboardPage',
@@ -91,7 +93,8 @@ export default Vue.extend({
     },
     lastPromptUpdate () {
       return this.$store.state.prompt.lastPromptUpdate
-    }
+    },
+    ...mapState('timer', ['dailyCounter']),
   },
   mounted() {
     const self = this;
