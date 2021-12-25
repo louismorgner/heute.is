@@ -22,7 +22,15 @@
 </template>
 
 <script>
+import {Howl} from 'howler';
 import soundFile from "../static/sound/timer_done.mp3";
+import lofiFile from "../static/sound/lofi.mp3";
+
+const lofiSound = new Howl({
+    src: [lofiFile],
+    html5: true,
+    loop: true,
+});
 
 export default {
   data() {
@@ -30,7 +38,8 @@ export default {
       timeLeft: 1000 * 60 * 25,
       isPaused: false,
       isFinished: false,
-      focusText: "Do your best work."
+      focusText: "Do your best work.",
+      howlerIdLofi: undefined
     }
   },
   computed: {
@@ -57,6 +66,8 @@ export default {
       };
       self.timeLeft = self.timeLeft - 1000;
     }, 1000);
+
+    this.startMusic();
   },
   created() {
     const query = this.$route.query;
@@ -77,8 +88,22 @@ export default {
     timerDone() {
       this.isPaused = true;
       this.isFinished = true;
-      const audio = new Audio(soundFile);
-      audio.play();
+
+      this.stopMusic();
+
+      // Finish sound
+      const sound = new Howl({
+        src: [soundFile],
+      });
+
+      sound.play();
+    },
+    startMusic() {
+      const id = lofiSound.play();
+      this.howlerIdLofi = id;
+    },
+    stopMusic() {
+      lofiSound.fade(1, 0, 1000, this.howlerIdLofi);
     }
   }
 }
