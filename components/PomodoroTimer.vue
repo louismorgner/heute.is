@@ -1,5 +1,5 @@
 <template>
-  <div id="pomodoroTimer">
+  <div id="pomodoroTimer" data-theme="dark" >
     <label for="my-modal-2" class="btn btn-sm btn-ghost">Start timer</label> 
     <input id="my-modal-2" type="checkbox"  class="modal-toggle"> 
     <div class="modal">
