@@ -1,6 +1,6 @@
 <template>
-  <div id="rootContainer" class="p-10 h-screen bg-cover bg-center text-white" style="background-image: url('https://images.unsplash.com/photo-1515896769750-31548aa180ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&q=80')" >
-    <div class="container mx-auto h-full relative z-10">
+  <div class="text-white">
+    <div class="absolute top-10 left-10 bottom-10 right-10 z-10">
       <div class="container w-full">
         <div class="grid grid-cols-2">
           <div class="">
@@ -12,7 +12,7 @@
           </div>
         </div>
       </div>
-      <div class="max-w-4xl w-full absolute top-2/4 left-2/4 transform -translate-y-2/3 -translate-x-1/2 text-center">
+      <div class="max-w-4xl w-full mx-auto text-center" style="margin-top: 25vh">
         <h1 class="text-6xl font-medium leading-10" style="font-size: 4rem;line-height: 4.2rem;" >{{ headline }}</h1>
         <div v-if="!showBuildPrompt">
           <button class="btn btn-outline btn-circle btn-xs mt-5" style="color: rgb(255 255 255 / 31%)" @click="toggleBuildPrompt(true)">
@@ -47,6 +47,7 @@
     </div>
     <div class="w-full h-1/2 absolute top-0 left-0 z-0" style="background: linear-gradient(180deg, #000000c7, transparent);" />
     <div class="w-full h-1/2 absolute bottom-0 left-0 z-0" style="background: linear-gradient(0deg, #000000c7, transparent);" />
+  <div id="backgroundLayer" class="p-10 h-full bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1515896769750-31548aa180ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&q=80')" ></div>
   </div>
 </template>
 
@@ -56,6 +57,7 @@ import { mapState } from 'vuex'
 
 export default Vue.extend({
   name: 'DashboardPage',
+  layout: 'fullScreen',
   data() {
     return {
       time: "",
