@@ -69,6 +69,10 @@ export default {
     }, 1000);
 
     this.startMusic();
+
+    this.$mixpanel.track("timer_started", {
+      duration: this.timerString
+    })
   },
   created() {
     const query = this.$route.query;

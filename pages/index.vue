@@ -141,6 +141,8 @@ export default Vue.extend({
         this.showBuildPrompt = false;
         this.$store.dispatch('prompt/setPrompt', this.buildPrompt)
         this.headline = this.buildPrompt;
+
+        this.$mixpanel.track("daily_prompt_answered")
       }
     },
   },
