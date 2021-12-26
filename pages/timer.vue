@@ -1,22 +1,20 @@
 <template>
   <div id="timerWrapper" class="bg-black h-screen w-full">
-    <div class="max-w-4xl w-full absolute top-2/4 left-2/4 transform -translate-y-2/3 -translate-x-1/2 text-center">
+    <div class="max-w-2xl w-full absolute top-2/4 left-2/4 transform -translate-y-2/3 -translate-x-1/2 text-center">
       <div v-if="!isFinished">
         <h1 class="timer">{{ timerString }}</h1>
         <p>{{ focusText }}</p>
       </div>
       <div v-else>
-        <nuxt-link to="/">Go back</nuxt-link>    
-        <input type="checkbox" id="st1" value="1">
-        <label for="st1"></label> 
-        <input type="checkbox" id="st2" value="2" />
-        <label for="st2"></label>
-        <input type="checkbox" id="st3" value="3" />
-        <label for="st3"></label>
-        <input type="checkbox" id="st4" value="4" />
-        <label for="st4"></label>
-        <input type="checkbox" id="st5" value="5" />
-        <label for="st5"></label>
+        <div>
+          <h3 class="text-3xl mb-10">How satisfies were you with this focus block?</h3>
+          <img class="inline-block mx-3 reactionEmoji" src="/img/emojis/very_bad.png" width="50px" @click="rateBlock(1)" />
+          <img class="inline-block mx-3 reactionEmoji" src="/img/emojis/bad.png" width="50px" @click="rateBlock(2)" />
+          <img class="inline-block mx-3 reactionEmoji" src="/img/emojis/neutral.png" width="50px" @click="rateBlock(3)" />
+          <img class="inline-block mx-3 reactionEmoji" src="/img/emojis/good.png" width="50px" @click="rateBlock(4)"  />
+          <img class="inline-block mx-3 reactionEmoji" src="/img/emojis/very_good.png" width="50px" @click="rateBlock(5)" />
+        </div>
+        <nuxt-link to="/" class="btn glass mt-10" >Go back</nuxt-link>    
       </div>
     </div>
   </div>
@@ -107,58 +105,37 @@ export default {
       this.$store.dispatch('timer/setCounter', { increment: true })
     },
     startMusic() {
+      if(this.isFinished) return;
       const id = lofiSound.play();
       this.howlerIdLofi = id;
     },
     stopMusic() {
       lofiSound.fade(1, 0, 1000, this.howlerIdLofi);
+    },
+    rateBlock(rating) {
+      // Gathers the rating of this timer block
+      this.$router.push({ name: "index"})
+
+      this.$mixpanel.track("timer_rating", {
+        rating
+      });
     }
   }
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .timer {
   font-size: 10rem;
 }
-input {
-  border: 0;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  position: absolute !important;
-  clip: rect(1px 1px 1px 1px);
-  clip: rect(1px, 1px, 1px, 1px);
-  opacity: 0;
-}
 
-label {
-  position: relative;
-  float: right;
-  color: #C8C8C8;
-}
+.reactionEmoji {
+  transition: all ease-out 0.15s;
+  filter: grayscale(80%);
 
-label:before {
-  margin: 5px;
-  content: "\f005";
-  font-family: FontAwesome;
-  display: inline-block;
-  font-size: 1.5em;
-  color: #ccc;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-}
-
-input:checked ~ label:before {
-  color: #FFC107;
-}
-
-label:hover ~ label:before {
-  color: #ffdb70;
-}
-
-label:hover:before {
-  color: #FFC107;
+  &:hover {
+    transform: scale(1.4);
+    filter: grayscale(0%);
+  }
 }
 </style>
