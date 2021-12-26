@@ -1,7 +1,7 @@
 <template>
   <div class="text-white">
-    <div class="absolute top-10 left-10 bottom-10 right-10 z-10">
-      <div class="container w-full">
+    <div class="absolute top-11 left-11 bottom-11 right-11 z-10 flex items-center justify-center">
+      <div class="w-full absolute top-0">
         <div class="grid grid-cols-2">
           <div class="">
             <HeuteIsLogo class="mb-1" />
@@ -12,7 +12,8 @@
           </div>
         </div>
       </div>
-      <div class="max-w-4xl w-full mx-auto text-center" style="margin-top: 25vh">
+      <!-- div class="max-w-4xl w-full mx-auto text-center" style="margin-top: 25vh"-->
+      <div class="max-w-4xl w-full text-center">
         <h1 class="text-6xl font-medium leading-10" style="font-size: 4rem;line-height: 4.2rem;" >{{ headline }}</h1>
         <div v-if="!showBuildPrompt">
           <button class="btn btn-outline btn-circle btn-xs mt-5" style="color: rgb(255 255 255 / 31%)" @click="toggleBuildPrompt(true)">
@@ -28,7 +29,7 @@
           <div v-show="showBuildPromptSubmissionHint" class="badge">Hit 'Enter' to save your daily goal.</div>
         </div>
       </div>
-      <div class="container w-full bottom-1 absolute">
+      <div class="w-full bottom-0 absolute">
         <div class="grid grid-cols-2">
           <a href="https://medium.com/heute-is" target="_blank" class="">
             <img src="~/static/icon.png" alt="" width="35px">

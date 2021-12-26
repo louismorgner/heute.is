@@ -2,7 +2,7 @@
   <div id="pomodoroTimer" data-theme="dark" >
     <label for="my-modal-2" class="btn btn-sm btn-ghost">Start timer</label> 
     <input id="my-modal-2" type="checkbox"  class="modal-toggle"> 
-    <div class="modal absolute w-screen h-screen -top-10 -left-10">
+    <div class="modal absolute w-screen h-screen -top-11 -left-11">
       <div class="modal-box" @keyup.enter="startTimer">
         <p class="mb-4" >To start a new pomodoro timer, please answer a few questions</p> 
         <input v-model="pomodoroFocus" type="text" placeholder="What will you work on?" class="input input-bordered w-full">
