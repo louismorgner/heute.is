@@ -29,6 +29,7 @@
         </div>
       </div>
     </div>
+    <div class="gradient-background"></div>
   </div>
 </template>
 
@@ -162,7 +163,7 @@ export default {
 
 <style scoped lang="scss">
 #timerWrapper {
-  background-image: url("~/static/img/gradient_background.jpg");
+  // background-image: url("~/static/img/gradient_background.jpg");
   background-size: cover;
   background-position: center;
 }
@@ -178,6 +179,26 @@ export default {
   &:hover {
     transform: scale(1.4);
     filter: grayscale(0%);
+  }
+}
+
+.gradient-background {
+  background: linear-gradient(160deg,#9FADFB, #F4DDD5);
+  background-size: 240% 240%;
+  animation: gradient-animation 20s ease infinite;
+  height: 100%;
+  width: 100%;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
 </style>
