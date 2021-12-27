@@ -4,7 +4,8 @@
       <div v-if="!isFinished">
         <h1 class="timer text-white mb-o leading-normal">{{ timerString }}</h1>
         <progress class="progress progress-primary max-w-sm mt-0 mb-5 opacity-40" :value="timeLeft" :max="initialTime"></progress> 
-        <p class="text-white text-3xl font-light" >{{ focusText }}</p>
+        <p class="text-white text-3xl font-light mb-4" >{{ focusText }}</p>
+        <div class="inline text-white">{{ startedAtString }} - {{ endAtString }}</div> 
       </div>
       <div v-else>
         <div>
@@ -51,6 +52,7 @@ export default {
       initialTime: 1000 * 60 * 25,
       isPaused: false,
       isFinished: false,
+      startedAt: undefined,
       focusText: "Do your best work.",
       howlerIdLofi: undefined,
       isMusicPlaying: true
@@ -65,6 +67,22 @@ export default {
         return minutes + ":0" + seconds;
       }
       return minutes + ":" + seconds;
+    },
+    startedAtString() {
+      const date = new Date(this.startedAt);
+      if(date.getMinutes() < 10)  {
+        return date.getHours() + ":0" + date.getMinutes()
+      } else {
+        return date.getHours() + ":" + date.getMinutes()
+      }
+    },
+    endAtString() {
+      const date = new Date(this.startedAt + this.initialTime);
+      if(date.getMinutes() < 10)  {
+        return date.getHours() + ":0" + date.getMinutes()
+      } else {
+        return date.getHours() + ":" + date.getMinutes()
+      }
     }
   },
   mounted() {
@@ -80,6 +98,8 @@ export default {
       };
       self.timeLeft = self.timeLeft - 1000;
     }, 1000);
+
+    this.startedAt = new Date().getTime();
 
     this.startMusic();
 
