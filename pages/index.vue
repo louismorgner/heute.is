@@ -31,9 +31,9 @@
       </div>
       <div class="w-full bottom-0 absolute">
         <div class="grid grid-cols-2">
-          <a href="https://medium.com/heute-is" target="_blank" class="">
+          <NuxtLink to="/about">
             <img src="~/static/icon.png" alt="" width="35px">
-          </a>
+          </NuxtLink>
           <div class="text-right">
             <div data-tip="This shows you the progress of the year in percent" class="tooltip tooltip-left">
               <div class="yearProgressWrapper">
