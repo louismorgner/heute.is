@@ -1,3 +1,5 @@
+const isServerlessEnvironment = process.env.ON_VERCEL == 'true'
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -83,9 +85,8 @@ export default {
     themes: ['dark', 'light'],
   },
 
-  serverMiddleware: {
-    '/api': '~/api',
-  },
+  // https://stackoverflow.com/questions/61974865/how-to-deploy-nuxt-jsssr-with-express-js-to-vercel-via-gitlab
+  serverMiddleware: isServerlessEnvironment ? [] : ['~/api/index.js'],
 
   auth: {
     strategies: {
