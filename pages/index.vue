@@ -30,10 +30,13 @@
         </div>
       </div>
       <div class="w-full bottom-0 absolute">
-        <div class="grid grid-cols-2">
+        <div class="grid" style="grid-template-columns: 1fr 3fr 1fr;">
           <NuxtLink to="/about">
             <img src="~/static/icon.png" alt="" width="35px">
           </NuxtLink>
+          <div class="flex items-center justify-items-center">
+            <span class="block w-full text-center" style="color: #ffffffb0">"{{ dailyQuote.q }}" - {{ dailyQuote.a }}</span>
+          </div>
           <div class="text-right">
             <div data-tip="This shows you the progress of the year in percent" class="tooltip tooltip-left">
               <div class="yearProgressWrapper">
@@ -65,8 +68,13 @@ export default Vue.extend({
       buildPrompt: "",
       headline: "What's the most impactful thing you can accomplish today?",
       showBuildPrompt: true,
-      showBuildPromptSubmissionHint: false
+      showBuildPromptSubmissionHint: false,
+      dailyQuote: {} // From zenquotes.io
     }
+  },
+  async fetch(){
+    const quote = await this.$axios.$get("https://zenquotes.io/api/today");
+    this.dailyQuote = quote[0];
   },
   computed: {
     yearInPercent() {
