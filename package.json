@@ -17,6 +17,7 @@
     "@nuxtjs/pwa": "^3.3.5",
     "core-js": "^3.19.3",
     "daisyui": "^1.19.0",
+    "express": "^4.17.2",
     "howler": "^2.2.3",
     "mixpanel-browser": "^2.42.1",
     "nuxt": "^2.15.8",

@@ -81,4 +81,8 @@ export default {
   daisyui: {
     themes: ['dark', 'light'],
   },
+
+  serverMiddleware: {
+    '/api': '~/api',
+  },
 }
