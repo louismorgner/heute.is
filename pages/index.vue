@@ -6,6 +6,7 @@
           <div class="">
             <HeuteIsLogo class="mb-1" />
             <h3>{{ dateString }}</h3>
+            <button @click="login">Login</button>
           </div>
           <div class="text-right">
             <h3 class="text-2xl">{{ time }}</h3>
@@ -156,6 +157,9 @@ export default Vue.extend({
         this.$mixpanel.track("daily_prompt_answered")
       }
     },
+    login() {
+      this.$auth.loginWith('auth0')
+    }
   },
 })
 </script>

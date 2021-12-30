@@ -46,6 +46,7 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
   ],
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
@@ -84,5 +85,15 @@ export default {
 
   serverMiddleware: {
     '/api': '~/api',
+  },
+
+  auth: {
+    strategies: {
+      auth0: {
+        domain: 'dev-eyz7fvbc.us.auth0.com',
+        clientId: 'yEWOmk4GiSWYgi9afAEPmV1fhXrMp6Ox',
+        audience: '',
+      },
+    },
   },
 }
