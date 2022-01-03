@@ -15,6 +15,11 @@ export const mutations = {
 
 export const actions = {
   async getTodaysImage(context) {
+    // Temporary auth fix for now until proper user authentication (with guest role) is implemented
+    await this.$apolloHelpers.onLogin(
+      'fnAEbvVYTCACU2qOsQcYLL9F5XRr4Rc4KAeqJ-ri'
+    )
+
     const client = this.app.apolloProvider.defaultClient
     const query = gql`
       {

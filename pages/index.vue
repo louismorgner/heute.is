@@ -126,15 +126,8 @@ export default Vue.extend({
       this.showBuildPrompt = false;
       this.headline = this.$store.state.prompt.promptToday;
     }
-
-    this.testDB();
   },
   methods: {
-    async testDB() {
-      await this.$apolloHelpers.onLogin("fnAEbvVYTCACU2qOsQcYLL9F5XRr4Rc4KAeqJ-ri")
-
-      // this.$store.dispatch("config/getTodaysImage")
-    },
     currentTime() {
       // Sets time to the current time string for watch
       const now = new Date()
