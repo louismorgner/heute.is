@@ -47,6 +47,7 @@ export default {
     '@nuxtjs/pwa',
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
+    '@nuxtjs/apollo',
   ],
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
@@ -95,5 +96,14 @@ export default {
         audience: '',
       },
     },
+  },
+
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: 'https://graphql.fauna.com/graphql',
+      },
+    },
+    authenticationType: 'Bearer',
   },
 }
