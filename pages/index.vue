@@ -74,8 +74,7 @@ export default Vue.extend({
     }
   },
   async fetch(){
-    this.$store.dispatch("config/getTodaysImage"); // Get new background image
-
+    await this.$store.dispatch("config/getTodaysImage"); // Get new background image
     try {
       const quote = await this.$axios.$get("https://zenquotes.io/api/today");
       this.dailyQuote = quote[0];
