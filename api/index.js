@@ -5,9 +5,11 @@ const app = express()
 
 // Require API routes
 const test = require('./routes/test')
+const cron = require('./routes/cron')
 
 // Import API Routes
 app.use(test)
+app.use(cron)
 
 // Export express app
 module.exports = app
