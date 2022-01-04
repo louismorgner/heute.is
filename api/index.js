@@ -1,5 +1,5 @@
 const express = require('express')
-const scheduleCrons = require('./cron/')
+// const scheduleCrons = require('./cron/')
 
 // Create express instance
 const app = express()
@@ -24,4 +24,4 @@ if (require.main === module) {
   })
 }
 
-scheduleCrons()
+// scheduleCrons()
