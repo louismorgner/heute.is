@@ -46,6 +46,8 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
+    '@nuxtjs/apollo',
   ],
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
@@ -80,5 +82,28 @@ export default {
 
   daisyui: {
     themes: ['dark', 'light'],
+  },
+
+  serverMiddleware: {
+    '/api': '~/api',
+  },
+
+  auth: {
+    strategies: {
+      auth0: {
+        domain: 'dev-eyz7fvbc.us.auth0.com',
+        clientId: 'yEWOmk4GiSWYgi9afAEPmV1fhXrMp6Ox',
+        audience: '',
+      },
+    },
+  },
+
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: 'https://graphql.fauna.com/graphql',
+      },
+    },
+    authenticationType: 'Bearer',
   },
 }

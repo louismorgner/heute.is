@@ -1,0 +1,13 @@
+name: 15-minute-cron
+on:
+  schedule:
+    - cron: '0 0 * * *'
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call daily update route
+        run: |
+          curl --request GET \
+          --url 'https://heute.is/api/cron/updateDailyPicture' \
+          --header 'Authorization: Bearer ${{ secrets.API_SECRET_KEY }}'

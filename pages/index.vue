@@ -6,6 +6,7 @@
           <div class="">
             <HeuteIsLogo class="mb-1" />
             <h3>{{ dateString }}</h3>
+            <!-- button @click="login">Login</button -->
           </div>
           <div class="text-right">
             <h3 class="text-2xl">{{ time }}</h3>
@@ -51,7 +52,7 @@
     </div>
     <div class="w-full h-1/2 absolute top-0 left-0 z-0" style="background: linear-gradient(180deg, #000000c7, transparent);" />
     <div class="w-full h-1/2 absolute bottom-0 left-0 z-0" style="background: linear-gradient(0deg, #000000c7, transparent);" />
-  <div id="backgroundLayer" class="p-10 h-full bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1515896769750-31548aa180ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&q=80')" ></div>
+  <div id="backgroundLayer" class="p-10 h-full bg-cover bg-center" :style="{'background-image': `url(${(todaysImage)})`}" ></div>
   </div>
 </template>
 
@@ -69,10 +70,12 @@ export default Vue.extend({
       headline: "What's the most impactful thing you can accomplish today?",
       showBuildPrompt: true,
       showBuildPromptSubmissionHint: false,
-      dailyQuote: {} // From zenquotes.io
+      dailyQuote: {}, // From zenquotes.io
     }
   },
   async fetch(){
+    this.$store.dispatch("config/getTodaysImage"); // Get new background image
+
     const quote = await this.$axios.$get("https://zenquotes.io/api/today");
     this.dailyQuote = quote[0];
   },
@@ -106,6 +109,7 @@ export default Vue.extend({
       return this.$store.state.prompt.lastPromptUpdate
     },
     ...mapState('timer', ['dailyCounter']),
+    ...mapState('config', ['todaysImage']),
   },
   mounted() {
     const self = this;
@@ -156,6 +160,9 @@ export default Vue.extend({
         this.$mixpanel.track("daily_prompt_answered")
       }
     },
+    login() {
+      this.$auth.loginWith('auth0')
+    }
   },
 })
 </script>

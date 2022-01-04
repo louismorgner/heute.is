@@ -1,0 +1,9 @@
+type featureImage {
+  url: String!
+  lastUsed: String
+  isTodaysImage: Boolean
+}
+
+type Query {
+  getTodaysFeatureImage(isTodaysImage: Boolean): featureImage
+}
