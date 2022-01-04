@@ -1,15 +1,16 @@
 const express = require('express')
+const scheduleCrons = require('./cron/')
 
 // Create express instance
 const app = express()
 
 // Require API routes
 const test = require('./routes/test')
-const cron = require('./routes/cron')
+// const cron = require('./routes/cron')
 
 // Import API Routes
 app.use(test)
-app.use(cron)
+// app.use(cron)
 
 // Export express app
 module.exports = app
@@ -22,3 +23,5 @@ if (require.main === module) {
     console.log(`API server listening on port ${port}`)
   })
 }
+
+scheduleCrons()
