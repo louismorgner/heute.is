@@ -18,13 +18,13 @@ const client = new faunadb.Client({
 // Test route
 router.use('/cron/updateDailyPicture', async (req, res) => {
   // Check auth
-  const { authorization } = req.headers
+  if (process.env.NODE_ENV === 'production') {
+    const { authorization } = req.headers
 
-  console.log(authorization)
-
-  if (authorization !== `Bearer ${process.env.API_SECRET_KEY}`) {
-    res.status(401).json({ success: false })
-    return
+    if (authorization !== `Bearer ${process.env.API_SECRET_KEY}`) {
+      res.status(401).json({ success: false })
+      return
+    }
   }
 
   // Remove todays tag from current daily picture
