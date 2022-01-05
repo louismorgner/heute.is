@@ -1,3 +1,7 @@
+const { Router } = require('express')
+
+const router = Router()
+
 const faunadb = require('faunadb')
 const q = faunadb.query
 
@@ -12,8 +16,7 @@ const client = new faunadb.Client({
 })
 
 // Test route
-async function updateDailyPicture() {
-  /*
+router.use('/cron/updateDailyPicture', async (req, res) => {
   // Check auth
   const { authorization } = req.headers
 
@@ -21,7 +24,6 @@ async function updateDailyPicture() {
     res.status(401).json({ success: false })
     return
   }
-  */
 
   // Remove todays tag from current daily picture
   // Get today ->  Paginate(Match(Index("getTodaysFeatureImage"), true))
@@ -67,6 +69,8 @@ async function updateDailyPicture() {
   )
 
   console.log('Successfully updated new todays image')
-}
 
-module.exports = updateDailyPicture
+  res.send('success')
+})
+
+module.exports = router
