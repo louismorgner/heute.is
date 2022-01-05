@@ -20,6 +20,8 @@ router.use('/cron/updateDailyPicture', async (req, res) => {
   // Check auth
   const { authorization } = req.headers
 
+  console.log(authorization)
+
   if (authorization !== `Bearer ${process.env.API_SECRET_KEY}`) {
     res.status(401).json({ success: false })
     return
