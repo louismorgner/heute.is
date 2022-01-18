@@ -50,6 +50,24 @@
         </div>
       </div>
     </div>
+
+    <div id="sideMenu" class="fixed right-0 left-1/2 top-0 bottom-0 z-10 drawer drawer-end">
+
+        <input id="my-drawer-4" type="checkbox" class="drawer-toggle"> 
+        <div class="sideMenuItemWrapper absolute top-1/2 p-3 drawer-content">
+          <label for="my-drawer-4" class="drawer-button">
+            <img src="~/static/img/checklist.svg" alt="" width="30px">
+          </label>
+        </div>
+
+      <div class="drawer-side">
+        <label for="my-drawer-4" class="drawer-overlay"></label> 
+        <div class="w-full h-full">
+          <TasksModule />
+        </div>
+      </div>
+    </div>
+
     <div class="w-full h-1/2 absolute top-0 left-0 z-0" style="background: linear-gradient(180deg, #000000c7, transparent);" />
     <div class="w-full h-1/2 absolute bottom-0 left-0 z-0" style="background: linear-gradient(0deg, #000000c7, transparent);" />
   <div id="backgroundLayer" class="p-10 h-full bg-cover bg-center" :style="{'background-image': `url(${(todaysImage)})`}" ></div>
@@ -187,5 +205,12 @@ textarea.buildPromptForm {
 textarea:focus{
     outline: none!important;
     box-shadow: none!important;
+}
+
+.sideMenuItemWrapper {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding-right: 50px;
+  transform: translateX(35px);
 }
 </style>
