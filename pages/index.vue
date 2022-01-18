@@ -51,7 +51,7 @@
       </div>
     </div>
 
-    <div id="sideMenu" class="fixed right-0 left-1/2 top-0 bottom-0 z-10 drawer drawer-end">
+    <div id="sideMenu" class="fixed right-0 left-0 top-0 bottom-0 z-10 drawer drawer-end">
 
         <input id="my-drawer-4" type="checkbox" class="drawer-toggle"> 
         <div class="sideMenuItemWrapper absolute top-1/2 p-3 drawer-content">
@@ -61,8 +61,9 @@
         </div>
 
       <div class="drawer-side">
-        <label for="my-drawer-4" class="drawer-overlay"></label> 
-        <div class="w-full h-full">
+        <label for="my-drawer-4" class="drawer-overlay"></label>
+        <div class="w-full h-full grid grid-cols-2">
+          <div class="" style="	background-color: rgb(0 0 0 0.2)"></div>
           <TasksModule />
         </div>
       </div>
