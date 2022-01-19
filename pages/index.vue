@@ -50,6 +50,33 @@
         </div>
       </div>
     </div>
+
+    <!-- External trigger trick -->
+    <div class="sideMenuItemWrapper absolute top-1/2 right-0 p-3 drawer-content z-10" @click="openDrawer">
+      <label for="my-drawer-4" class="drawer-button cursor-pointer">
+        <img src="~/static/img/checklist.svg" alt="" width="30px">
+      </label>
+    </div>
+
+    <div id="sideMenu" ref="sideMenu" class="fixed right-0 left-0 top-0 bottom-0 z-10 drawer drawer-end" style="z-index:-10">
+
+        <!-- Invisible placeholder element to make drawer work -->
+        <input id="my-drawer-4" type="checkbox" class="drawer-toggle"> 
+        <div ref="drawerOpenInput" class="sideMenuItemWrapper absolute top-1/2 p-3 drawer-content" style="opacity: 0">
+          <label for="my-drawer-4" class="drawer-button">
+            <img src="~/static/img/checklist.svg" alt="" width="30px">
+          </label>
+        </div>
+
+      <div class="drawer-side">
+        <label ref="drawer"  for="my-drawer-4" class="drawer-overlay"></label>
+        <div class="w-full h-full grid grid-cols-2">
+          <div style="background-color: rgb(0 0 0 0.2)" @click="closeOveralyDrawer" ></div>
+          <TasksModule />
+        </div>
+      </div>
+    </div>
+
     <div class="w-full h-1/2 absolute top-0 left-0 z-0" style="background: linear-gradient(180deg, #000000c7, transparent);" />
     <div class="w-full h-1/2 absolute bottom-0 left-0 z-0" style="background: linear-gradient(0deg, #000000c7, transparent);" />
   <div id="backgroundLayer" class="p-10 h-full bg-cover bg-center" :style="{'background-image': `url(${(todaysImage)})`}" ></div>
@@ -165,6 +192,19 @@ export default Vue.extend({
     },
     login() {
       this.$auth.loginWith('auth0')
+    },
+    closeOveralyDrawer() {
+      this.$refs.drawer.click();
+      this.$refs.sideMenu.style.zIndex = "-10";
+      /*
+      setTimeout(function() {
+          vm.$refs.sideMenu.style.zIndex = "-10";
+      }, 800);
+      */
+    },
+    openDrawer() {
+      this.$refs.sideMenu.style.zIndex = "10";
+      this.$refs.drawerOpenInput.click();
     }
   },
 })
@@ -187,5 +227,12 @@ textarea.buildPromptForm {
 textarea:focus{
     outline: none!important;
     box-shadow: none!important;
+}
+
+.sideMenuItemWrapper {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding-right: 50px;
+  transform: translateX(35px);
 }
 </style>
