@@ -3,10 +3,12 @@
         <h1 class="text-6xl mt-0 mb-12">Tasks</h1>
 
         <div>
-            <div v-for="(task, index) in tasks" :key="index" class="taskItem flex items-center mb-6">
-                <input v-model="task.isDone" type="checkbox" :checked="task.isDone" class="checkbox checkbox-lg mr-4" :class="{ isDone: task.isDone }">
-                <span :class="{ isDone: task.isDone, 'text-2xl': true }" >{{ task.name }}</span>
-            </div>
+            <draggable v-model="tasks" @start="drag=true" @end="drag=false">
+                <div v-for="(task) in tasks" :key="task.id" class="taskItem flex items-center mb-6">
+                    <input type="checkbox" :checked="task.isDone" class="checkbox checkbox-lg mr-4" :class="{ isDone: task.isDone }" @click="toggleTaskState(task.id)">
+                    <span :class="{ isDone: task.isDone, 'text-2xl': true }" >{{ task.name }}</span>
+                </div>
+            </draggable>
         </div>
 
         <div class="mt-8">
@@ -42,27 +44,33 @@
 </template>
 
 <script>
+import draggable from 'vuedraggable'
+
 export default {
+    components: {
+            draggable,
+    },
   data() {
       return {
-        tasks: [
-            {
-                name: "Call someone",
-                isDone: false
-            },
-            {
-                name: "Write report",
-                isDone: false
-            }
-        ],
-        inbox: [
-            "This is nice",
-            "and that as well"
-        ],
         showTaskAddInput: false,
         newTaskText: ""
       }
   },
+  computed: {
+        tasks: {
+            get() {
+                return this.$store.state.tasks.tasks
+            },
+            set(value) {
+                this.$store.commit('tasks/updateTaskList', value)
+            }
+        },
+        inbox: {
+            get() {
+                return this.$store.state.tasks.inbox
+            }
+        }
+    },
   methods: {
     toggleTaskAddInputVisibility() {
       this.showTaskAddInput = !this.showTaskAddInput;
@@ -73,28 +81,23 @@ export default {
         });
       }
     },
+    toggleTaskState(key) {
+        this.$store.commit("tasks/toggleTaskState", key);
+    },
     addTask() {
-        this.tasks.push({
-            name: this.newTaskText,
-            isDone: false
-        })
+        this.$store.commit("tasks/addTask", this.newTaskText);
 
         this.newTaskText = "";
         this.toggleTaskAddInputVisibility();
     },
     turnInboxItemToTask(index) {
-        this.tasks.push({
-            name: this.inbox[index],
-            isDone: false
-        })
-        this.inbox.splice(index, 1)
+        this.$store.commit("tasks/turnInboxItemToTask", index);
     },  
     removeInboxItem(index) {
-        this.inbox.splice(index, 1)
+        this.$store.commit("tasks/removeInboxItem", index);
     }
   }
 }
-</script>
 </script>
 
 // https://stackoverflow.com/questions/69941166/how-to-close-daisyui-drawer-menu-with-just-one-click
