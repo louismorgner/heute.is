@@ -85,7 +85,7 @@ export default {
         toggleTaskAddInputVisibility() {
       this.showTaskAddInput = !this.showTaskAddInput;
       if(this.showTaskAddInput === true) {
-          // Defer to nextTick so element is visible
+          // Defer to nextTick so element is visible (small fix)
           this.$nextTick(function(){
             this.$refs.taskInput.focus();
         });
