@@ -1,6 +1,6 @@
 export const state = () => ({
   tasks: [],
-  inbox: ['test1', 'test 3'],
+  inbox: [],
 })
 
 export const mutations = {
@@ -38,9 +38,39 @@ export const mutations = {
       },
     ]
 
-    state.inbox = state.inbox.filter((item, index) => index !== itemIndex)
+    state.inbox = state.inbox.filter((_item, index) => index !== itemIndex)
   },
   removeInboxItem(state, itemIndex) {
-    state.inbox = state.inbox.filter((item, index) => index !== itemIndex)
+    state.inbox = state.inbox.filter((_item, index) => index !== itemIndex)
+  },
+  setState(state, newState) {
+    state.tasks = newState.tasks
+    state.inbox = newState.inbox
+  },
+  resetTasksAndInbox(state) {
+    state.tasks = []
+    state.inbox = []
+  },
+}
+
+export const actions = {
+  retrieveLocalData(context) {
+    const dataStore = localStorage.getItem('taskData')
+    if (!dataStore) {
+      return null
+    }
+
+    const data = JSON.parse(dataStore)
+
+    context.commit('setState', data)
+  },
+  updateLocalData(context) {
+    localStorage.setItem(
+      'taskData',
+      JSON.stringify({
+        tasks: context.state.tasks,
+        inbox: context.state.inbox,
+      })
+    )
   },
 }

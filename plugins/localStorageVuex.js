@@ -4,5 +4,6 @@ export default (context) => {
 
   store.dispatch('prompt/retrieveLocalPromptData')
   store.dispatch('timer/retrieveLocalData')
+  store.dispatch('tasks/retrieveLocalData')
   // store.dispatch('config/retrieveLocalData')
 }

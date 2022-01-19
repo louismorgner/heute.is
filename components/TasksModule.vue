@@ -1,6 +1,11 @@
 <template>
     <div class="h-full w-full taskWrapper text-black">
-        <h1 class="text-6xl mt-0 mb-12">Tasks</h1>
+        <div>
+            <h1 class="text-6xl mt-0 mb-12 inline-block">Tasks</h1>
+            <button class="ml-4 cursor-pointer" @click="resetTasksAndInbox">
+                    <img src="~/static/img/refresh_icon.svg" alt="" width="10px" height="auto">
+            </button>
+        </div>
 
         <div>
             <draggable v-model="tasks" @start="drag=true" @end="drag=false">
@@ -71,8 +76,13 @@ export default {
             }
         }
     },
-  methods: {
-    toggleTaskAddInputVisibility() {
+    created() {
+        this.unsubscribe = this.$store.subscribe(() => {
+            this.$store.dispatch("tasks/updateLocalData");
+        });
+    },
+    methods: {
+        toggleTaskAddInputVisibility() {
       this.showTaskAddInput = !this.showTaskAddInput;
       if(this.showTaskAddInput === true) {
           // Defer to nextTick so element is visible
@@ -95,6 +105,9 @@ export default {
     },  
     removeInboxItem(index) {
         this.$store.commit("tasks/removeInboxItem", index);
+    },
+    resetTasksAndInbox() {
+        this.$store.commit("tasks/resetTasksAndInbox");
     }
   }
 }
