@@ -1,5 +1,8 @@
 <template>
-  <Nuxt id="nuxtLayout" class="relative"/>
+  <div class="w-full h-full">
+    <InboxModal />
+    <Nuxt id="nuxtLayout" class="relative" />
+  </div>
 </template>
 
 <style>

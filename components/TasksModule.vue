@@ -1,5 +1,5 @@
 <template>
-    <div class="h-full w-full taskWrapper text-black">
+    <div class="h-full w-full taskWrapper text-black" data-theme="light">
         <div>
             <h1 class="text-6xl mt-0 mb-12 inline-block">Tasks</h1>
             <button class="ml-4 cursor-pointer" @click="resetTasksAndInbox">
@@ -41,7 +41,7 @@
                 </button>
             </div>
             <div v-if="inbox.length === 0">
-                <p class="text-slate-500">You can add items to your inbox by pressing the 'a' key</p>
+                <p class="text-slate-500">You can add items to your inbox by pressing the <i>Command + i</i> key.</p>
             </div>
         </div>
 
