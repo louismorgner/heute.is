@@ -1,5 +1,5 @@
 <template>
-<div>
+<div  v-if="!loading">
     <div v-if="showModal" class="fixed w-full h-full z-50 flex text-center justify-center items-center" style="background: #00000082">
         <div class="max-w-lg rounded-lg p-14" style="background:black">
             <h3 class="text-2xl mb-7">What would you like to add to your inbox?</h3>
@@ -15,9 +15,15 @@ export default {
     data() {
         return {
             showModal: false,
-            inboxText: ""
+            inboxText: "",
+            loading: true
         }
     },
+    created () {
+        this.$nextTick(function () {
+           this.loading = false
+       })
+     },
     mounted() {
         window.addEventListener("keydown", e => {
             if(e.metaKey && e.key === "i") {
