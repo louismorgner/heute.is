@@ -1,10 +1,12 @@
 <template>
+<div>
     <div v-if="showModal" class="fixed w-full h-full z-50 flex text-center justify-center items-center" style="background: #00000082">
         <div class="max-w-lg rounded-lg p-14" style="background:black">
             <h3 class="text-2xl mb-7">What would you like to add to your inbox?</h3>
             <input ref="inputInbox" v-model="inboxText" type="text" placeholder="Inbox item..." class="input input-bordered w-full" @keyup.enter="addInboxItem">
         </div>
     </div>
+</div>
 </template>
 
 <script>
@@ -27,6 +29,10 @@ export default {
                         console.log(e);
                     }
                 });
+            }
+            if(e.key === "Escape") {
+                this.showModal = false;
+                this.inboxText = "";
             }
         });
     },
