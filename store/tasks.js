@@ -1,6 +1,6 @@
 export const state = () => ({
   tasks: [],
-  inbox: [],
+  inbox: [''],
 })
 
 export const mutations = {

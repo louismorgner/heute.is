@@ -31,7 +31,8 @@
 
         <h3 class="mt-14 text-2xl mb-5">Inbox</h3>
         <div>
-            <div v-for="(item, index) in inbox" :key="index" class="taskItem flex items-center mb-1">
+            <div v-if="inbox.length > 0">
+                <div v-for="(item, index) in inbox" :key="index" class="taskItem flex items-center mb-1">
                 <span class="text-lg">{{ item }}</span>
                 <button class="ml-5 mr-3 cursor-pointer" @click="turnInboxItemToTask(index)">
                     <img src="~/static/img/green_checkmark.svg" alt="" width="14px">
@@ -40,7 +41,8 @@
                     <img src="~/static/img/red_delete.png" alt="" width="10px" height="auto">
                 </button>
             </div>
-            <div v-if="inbox.length === 0">
+            </div>
+            <div v-else>
                 <p class="text-slate-500">You can add items to your inbox by pressing the <i>Command + i</i> key.</p>
             </div>
         </div>
