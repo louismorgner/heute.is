@@ -21,7 +21,11 @@ export default {
             if(e.metaKey && e.key === "i") {
                 this.showModal = true;
                 this.$nextTick(function(){
-                    this.$refs.inputInbox.focus()
+                    try {
+                        this.$refs.inputInbox.focus()
+                    } catch(e) {
+                        console.log(e);
+                    }
                 });
             }
         });
