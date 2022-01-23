@@ -47,7 +47,9 @@ export const mutations = {
   setState(state, newState) {
     state.tasks = newState.tasks
     state.inbox = newState.inbox
-    state.archive = newState.archive
+    if (newState.archive !== undefined) {
+      state.archive = newState.archive
+    }
   },
   resetTasksAndInbox(state) {
     state.tasks = []
