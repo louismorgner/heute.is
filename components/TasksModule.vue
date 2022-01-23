@@ -5,6 +5,9 @@
             <button class="ml-4 cursor-pointer" @click="resetTasksAndInbox">
                     <img src="~/static/img/refresh_icon.svg" alt="" width="10px" height="auto">
             </button>
+            <button class="ml-4 cursor-pointer" @click="archiveEverything">
+                    <img src="~/static/img/archive.svg" alt="" width="12px" height="auto">
+            </button>
         </div>
 
         <div>
@@ -31,21 +34,47 @@
 
         <h3 class="mt-14 text-2xl mb-5">Inbox</h3>
         <div>
+            <client-only>
             <div v-if="inbox.length > 0">
                 <div v-for="(item, index) in inbox" :key="index" class="taskItem flex items-center mb-1">
-                <span class="text-lg">{{ item }}</span>
-                <button class="ml-5 mr-3 cursor-pointer" @click="turnInboxItemToTask(index)">
-                    <img src="~/static/img/green_checkmark.svg" alt="" width="14px">
-                </button>
-                <button class="cursor-pointer" @click="removeInboxItem(index)">
-                    <img src="~/static/img/red_delete.png" alt="" width="10px" height="auto">
-                </button>
-            </div>
+                    <span class="text-lg">{{ item }}</span>
+                    <button class="ml-5 mr-3 cursor-pointer" @click="turnInboxItemToTask(index)">
+                        <img src="~/static/img/green_checkmark.svg" alt="" width="14px">
+                    </button>
+                    <button class="cursor-pointer" @click="removeInboxItem(index)">
+                        <img src="~/static/img/red_delete.png" alt="" width="10px" height="auto">
+                    </button>
+                </div>
             </div>
             <div v-else>
                 <p class="text-slate-500">You can add items to your inbox by pressing the <i>Command + i</i> key.</p>
             </div>
+            </client-only>
         </div>
+
+        <div class="space-y-7" style="margin-top: 40px"/>
+
+        <div class="collapse w-full collapse-arrow">
+        <input type="checkbox"> 
+        <div class="collapse-title text-xl font-medium p-0" style="background: transparent">
+            <h3 class="text-2xl mt-2">Archive</h3>
+        </div> 
+        <div class="collapse-content p-0" style="background: transparent"> 
+            <client-only>
+            <div v-if="archive.length > 0">
+            <div v-for="(item, index) in archive" :key="index" class="taskItem flex items-center mb-1">
+                <span class="text-lg">{{ item }}</span>
+                <button class="ml-5 mr-3 cursor-pointer" @click="turnArchiveItemToTask(index)">
+                    <img src="~/static/img/green_checkmark.svg" alt="" width="14px">
+                </button>
+                <button class="cursor-pointer" @click="removeArchiveItem(index)">
+                    <img src="~/static/img/red_delete.png" alt="" width="10px" height="auto">
+                </button>
+            </div>
+            </div>
+            </client-only>
+        </div>
+        </div> 
 
     </div>
 </template>
@@ -75,6 +104,11 @@ export default {
         inbox: {
             get() {
                 return this.$store.state.tasks.inbox
+            }
+        },
+        archive: {
+            get() {
+                return this.$store.state.tasks.archive
             }
         }
     },
@@ -110,7 +144,16 @@ export default {
     },
     resetTasksAndInbox() {
         this.$store.commit("tasks/resetTasksAndInbox");
-    }
+    },
+    archiveEverything() {
+        this.$store.dispatch("tasks/archiveEverything")
+    },
+    turnArchiveItemToTask(index) {
+        this.$store.commit("tasks/turnArchiveItemToTask", index);
+    },  
+    removeArchiveItem(index) {
+        this.$store.commit("tasks/removeArchiveItem", index);
+    },
   }
 }
 </script>
