@@ -12,9 +12,12 @@
 
         <div>
             <draggable v-model="tasks" @start="drag=true" @end="drag=false">
-                <div v-for="(task) in tasks" :key="task.id" class="taskItem flex items-center mb-6">
-                    <input type="checkbox" :checked="task.isDone" class="checkbox checkbox-lg mr-4" :class="{ isDone: task.isDone }" @click="toggleTaskState(task.id)">
-                    <span :class="{ isDone: task.isDone, 'text-2xl': true }" >{{ task.name }}</span>
+                <div v-for="(task) in tasks" :key="task.id" class="taskItem flex items-center mb-6" :class="{ isDone: task.isDone }">
+                    <input type="checkbox" :checked="task.isDone" class="checkbox checkbox-lg mr-4" @click="toggleTaskState(task.id)">
+                    <span :class="{ 'text-2xl': true }" >{{ task.name }}</span>
+                    <button class="ml-4 cursor-pointer" @click="startPomodoroTimer(task.name)">
+                        <img src="~/static/img/clock.svg" alt="" class="opacity-25 pomodoroTimerStartIcon" width="15px" height="auto">
+                    </button>
                 </div>
             </draggable>
         </div>
@@ -154,6 +157,9 @@ export default {
     removeArchiveItem(index) {
         this.$store.commit("tasks/removeArchiveItem", index);
     },
+    startPomodoroTimer(name) {
+        this.$router.push ({name: 'timer', query: {minutes: '25', focusText: name}})
+    }
   }
 }
 </script>
@@ -179,5 +185,21 @@ export default {
         box-shadow: 0px 4px 30px rgb(0 0 0 / 8%);
         border: 1px solid #ddd;
     }
+
+    .taskItem {
+        &:not(.isDone) {
+            &:hover {
+            .pomodoroTimerStartIcon {
+                opacity: 25%;
+            }
+        }
+        }
+    }
+
+     .pomodoroTimerStartIcon {
+                opacity: 0%;
+                transform: translateY(2px);
+                margin-left: 2px
+        }
 } 
 </style>
