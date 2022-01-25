@@ -44,6 +44,9 @@ export const mutations = {
   removeInboxItem(state, itemIndex) {
     state.inbox = state.inbox.filter((_item, index) => index !== itemIndex)
   },
+  removeTask(state, id) {
+    state.tasks = state.tasks.filter((task) => task.id !== id)
+  },
   setState(state, newState) {
     state.tasks = newState.tasks
     state.inbox = newState.inbox

@@ -18,6 +18,9 @@
                     <button class="ml-4 cursor-pointer" @click="startPomodoroTimer(task.name)">
                         <img src="~/static/img/clock.svg" alt="" class="opacity-25 pomodoroTimerStartIcon" width="15px" height="auto">
                     </button>
+                    <button class="ml-2 cursor-pointer" @click="removeTask(task.id)">
+                        <img src="~/static/img/trash.svg" alt="" class="opacity-25 pomodoroTimerStartIcon" width="15px" height="auto">
+                    </button>
                 </div>
             </draggable>
         </div>
@@ -159,6 +162,9 @@ export default {
     },
     startPomodoroTimer(name) {
         this.$router.push ({name: 'timer', query: {minutes: '25', focusText: name}})
+    },
+    removeTask(id) {
+        this.$store.commit("tasks/removeTask", id);
     }
   }
 }
@@ -187,12 +193,10 @@ export default {
     }
 
     .taskItem {
-        &:not(.isDone) {
-            &:hover {
+        &:hover {
             .pomodoroTimerStartIcon {
                 opacity: 25%;
             }
-        }
         }
     }
 
