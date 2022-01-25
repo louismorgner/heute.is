@@ -16,10 +16,10 @@
                     <input type="checkbox" :checked="task.isDone" class="checkbox checkbox-lg mr-4" @click="toggleTaskState(task.id)">
                     <span :class="{ 'text-2xl': true }" >{{ task.name }}</span>
                     <button class="ml-4 cursor-pointer" @click="startPomodoroTimer(task.name)">
-                        <img src="~/static/img/clock.svg" alt="" class="opacity-25 pomodoroTimerStartIcon" width="15px" height="auto">
+                        <img src="~/static/img/clock.svg" alt="" class="pomodoroTimerStartIcon" width="15px" height="auto">
                     </button>
                     <button class="ml-2 cursor-pointer" @click="removeTask(task.id)">
-                        <img src="~/static/img/trash.svg" alt="" class="opacity-25 pomodoroTimerStartIcon" width="15px" height="auto">
+                        <img src="~/static/img/trash.svg" alt="" class="pomodoroTimerStartIcon" width="15px" height="auto">
                     </button>
                 </div>
             </draggable>
@@ -198,12 +198,11 @@ export default {
                 opacity: 25%;
             }
         }
-    }
-
-     .pomodoroTimerStartIcon {
+        .pomodoroTimerStartIcon {
                 opacity: 0%;
                 transform: translateY(2px);
                 margin-left: 2px
         }
+    }
 } 
 </style>
