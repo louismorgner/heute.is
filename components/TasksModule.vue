@@ -193,15 +193,21 @@ export default {
     }
 
     .taskItem {
+
         &:hover {
             .pomodoroTimerStartIcon {
                 opacity: 25%;
             }
         }
-        .pomodoroTimerStartIcon {
+
+        &:not(:hover) {
+            .pomodoroTimerStartIcon {
                 opacity: 0%;
-                transform: translateY(2px);
-                margin-left: 2px
+            }
+        }
+        .pomodoroTimerStartIcon {
+            transform: translateY(2px);
+            margin-left: 2px
         }
     }
 } 
